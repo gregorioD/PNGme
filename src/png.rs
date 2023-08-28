@@ -7,7 +7,7 @@ use std::{
     str::FromStr,
 };
 
-struct Png {
+pub struct Png {
     signature: [u8; 8],
     chunks: Vec<Chunk>,
 }
@@ -76,7 +76,7 @@ impl Png {
         Self::STANDARD_HEADER
     }
 
-    fn chunks(&self) -> Vec<Chunk> {
+    pub fn chunks(&self) -> Vec<Chunk> {
         self.chunks.clone()
     }
 
@@ -87,11 +87,11 @@ impl Png {
         }
     }
 
-    fn append_chunk(&mut self, chunk: Chunk) -> () {
+    pub fn append_chunk(&mut self, chunk: Chunk) -> () {
         self.chunks.push(chunk);
     }
 
-    fn remove_chunk(&mut self, chunk_type_str: &str) -> Result<Chunk, &'static str> {
+    pub fn remove_chunk(&mut self, chunk_type_str: &str) -> Result<Chunk, &'static str> {
         let chunk_type = ChunkType::from_str(chunk_type_str).unwrap();
         if let Some(i) = self
             .chunks
@@ -104,7 +104,7 @@ impl Png {
         }
     }
 
-    fn chunk_by_type(&self, chunk_type_str: &str) -> Option<Chunk> {
+    pub fn chunk_by_type(&self, chunk_type_str: &str) -> Option<Chunk> {
         let chunk_type = ChunkType::from_str(chunk_type_str).unwrap();
 
         if let Some(found) = self
@@ -119,7 +119,7 @@ impl Png {
         }
     }
 
-    fn as_bytes(&self) -> Vec<u8> {
+    pub fn as_bytes(&self) -> Vec<u8> {
         self.as_bytes()
     }
 
